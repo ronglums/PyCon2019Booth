@@ -25,11 +25,6 @@ with urllib.request.urlopen(URL) as url:
 
 plt.imshow(Image.open(test_img))
 
-with urllib.request.urlopen(URL) as url:
-    test_img = io.BytesIO(url.read())
-
-plt.imshow(Image.open(test_img))
-
 
 #%%
 def imgToBase64(img):
