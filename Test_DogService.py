@@ -41,3 +41,6 @@ headers = {'Content-Type':'application/json'}
 result = requests.post(service_uri, input_data, headers=headers).text
 
 print(json.loads(result))
+
+
+#%%

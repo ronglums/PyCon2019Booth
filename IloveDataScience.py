@@ -4,12 +4,6 @@
 
 #%%
 print("hello world")
-print("hello Live share")
-
-#%%
-x = 2
-y = 3
-print(x+y)
 
 #%%
 import numpy as np
@@ -37,25 +31,66 @@ def draw_corr(df, size = 11):
 draw_corr(df)
 
 #%%
+import plotly.plotly as py
+import plotly.graph_objs as go
+
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 
-sns.set(style="dark")
-rs = np.random.RandomState(50)
+x, y, z = np.random.multivariate_normal(np.array([0,0,0]), np.eye(3), 400).transpose()
 
-# Set up the matplotlib figure
-f, axes = plt.subplots(3, 3, figsize=(9, 9), sharex=True, sharey=True)
+trace1 = go.Scatter3d(
+    x=x,
+    y=y,
+    z=z,
+    mode='markers',
+    marker=dict(
+        size=12,
+        color=z,                # set color to an array/list of desired values
+        colorscale='Viridis',   # choose a colorscale
+        opacity=0.8
+    )
+)
 
-# Rotate the starting point around the cubehelix hue circle
-for ax, s in zip(axes.flat, np.linspace(0, 3, 10)):
+data = [trace1]
+layout = go.Layout(
+    margin=dict(
+        l=0,
+        r=0,
+        b=0,
+        t=0
+    )
+)
+fig = go.Figure(data=data, layout=layout)
+py.iplot(fig, filename='3d-scatter-colorscale')
 
-    # Create a cubehelix colormap to use with kdeplot
-    cmap = sns.cubehelix_palette(start=s, light=1, as_cmap=True)
+#%%
+import requests 
+import os, json, base64
+from PIL import Image as pilimage
+from urllib.request import urlopen
+from IPython.display import Image, HTML, display
 
-    # Generate and plot a random bivariate dataset
-    x, y = rs.randn(2, 50)
-    sns.kdeplot(x, y, cmap=cmap, shade=True, cut=5, ax=ax)
-    ax.set(xlim=(-3, 3), ylim=(-3, 3))
+URL = "http://www.whateverydogdeserves.com/wp-content/uploads/2016/09/husky-meme-work.jpg"
 
-f.tight_layout()
+with urlopen(URL) as response:
+    with open('temp.jpg', 'bw+') as f:
+        shutil.copyfileobj(response, f)
+
+Image('temp.jpg')
+
+#%%
+
+def imgToBase64(img):
+    imgio = BytesIO()
+    img.save(imgio, 'JPEG')
+    img_str = base64.b64encode(imgio.getvalue())
+    return img_str.decode('utf-8')
+
+base64Img = imgToBase64(pilimage.open(test_img))
+
+service_uri = "http://52.190.24.229:80/score"
+input_data = json.dumps({'data': base64Img})
+headers = {'Content-Type':'application/json'}
+result = requests.post(service_uri, input_data, headers=headers).text
+
+print(json.loads(result))
