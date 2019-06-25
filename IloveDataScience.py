@@ -6,8 +6,8 @@
 print("hello world")
 
 #%%
-import numpy as np
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 p = np.linspace(0,20,100)
 plt.plot(p,np.sin(p))
