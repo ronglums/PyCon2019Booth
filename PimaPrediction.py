@@ -267,7 +267,7 @@ while (C_val < C_end):
     lr_predict_loop_test = lr_model_loop.predict(x_test)
     recall_score = metrics.recall_score(y_test, lr_predict_loop_test)
     recall_scores.append(recall_score)
-    if (recall_score < best_recall_score):
+    if (recall_score > best_recall_score):
         best_recall_score = recall_score
         best_lr_predict_test = lr_predict_loop_test
 
@@ -315,3 +315,6 @@ print(metrics.classification_report(y_test, lr_predict_test))
 print(metrics.recall_score(y_test,lr_predict_test))
 
 
+
+
+#%%

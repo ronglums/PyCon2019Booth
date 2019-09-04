@@ -13,7 +13,7 @@
         },
         "python": {
             "userManagedDependencies": true,
-            "interpreterPath": "C:\\Users\\ronglu\\.azureml\\envs\\py36\\python.exe",
+            "interpreterPath": "C:\\Users\\ronglu\\.azureml\\envs\\pycon\\python.exe",
             "condaDependenciesFile": "aml_config/conda_dependencies.yml"
         },
         "docker": {

@@ -4,6 +4,7 @@
 
 #%%
 print("hello world")
+print("123")
 
 #%%
 import pandas as pd

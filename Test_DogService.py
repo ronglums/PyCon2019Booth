@@ -3,19 +3,11 @@
 import requests 
 import os, json, base64
 from io import BytesIO
-import matplotlib.pyplot as plt
 from PIL import Image
 import urllib.request
 import io
 
-##Get random dog
-def get_random_dog():
-    r = requests.get(url ="https://dog.ceo/api/breeds/image/random")
-    URL= r.json()['message']
-    return URL
-
-##Get Random Dog Image. Or replace the URL with a picture of your own dog
-URL = get_random_dog()
+URL = "http://www.whateverydogdeserves.com/wp-content/uploads/2016/09/husky-meme-work.jpg"
 
 with urllib.request.urlopen(URL) as url:
     test_img = io.BytesIO(url.read())
@@ -23,8 +15,7 @@ with urllib.request.urlopen(URL) as url:
 # ## If you downloaded the dataset, you can try this arbitrary image from the test dataset
 # # test_img = os.path.join('breeds-10', 'val', 'n02085620-Chihuahua', 'n02085620_1271.jpg') 
 
-plt.imshow(Image.open(test_img))
-
+Image.open(test_img)
 
 #%%
 def imgToBase64(img):
@@ -42,5 +33,8 @@ result = requests.post(service_uri, input_data, headers=headers).text
 
 print(json.loads(result))
 
+#%%
+print("1")
+print("2")
 
 #%%
