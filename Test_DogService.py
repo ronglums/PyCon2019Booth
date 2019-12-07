@@ -24,6 +24,7 @@ def imgToBase64(img):
     img_str = base64.b64encode(imgio.getvalue())
     return img_str.decode('utf-8')
 
+#%%
 base64Img = imgToBase64(Image.open(test_img))
 
 service_uri = "http://52.190.24.229:80/score"
@@ -33,8 +34,5 @@ result = requests.post(service_uri, input_data, headers=headers).text
 
 print(json.loads(result))
 
-#%%
-print("1")
-print("2")
 
 #%%
